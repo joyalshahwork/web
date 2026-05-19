@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Customer Segmentation</title>
+
+  
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- ── HEADER ─────────────────────────────────────────────────────────── -->
+  <header class="site-header">
+    <div class="container">
+      <div class="header-inner">
+        <div class="logo">
+          <span class="logo-icon">◈</span>
+          <span class="logo-text">SegmentIQ</span>
+        </div>
+        <p class="tagline">K-Means Customer Segmentation · Mall Dataset</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── MAIN CONTENT ───────────────────────────────────────────────────── -->
+  <main class="container">
+
+    
+    <section class="card control-panel">
+      <h2 class="card-title">⚙️ Configuration</h2>
+
+      <div class="control-group">
+        <label for="cluster-slider" class="control-label">
+          Number of Clusters (k)
+ 
+          <span class="badge" id="cluster-value">5</span>
+        </label>
+
+    
+        <input
+          type="range"
+          id="cluster-slider"
+          min="2" max="10" value="5"
+          class="slider"
+          oninput="document.getElementById('cluster-value').textContent = this.value"
+        />
+
+        <div class="slider-labels">
+          <span>2</span><span>5</span><span>10</span>
+        </div>
+      </div>
+
+      <div class="info-box">
+        <strong>💡 Tip:</strong> Start with k=5 (the classic mall dataset answer).
+        Watch the <em>Elbow</em> chart – look for the "bend" where adding more
+        clusters stops helping much.
+      </div>
+
+      <!-- The button that triggers everything -->
+      <button id="run-btn" class="btn-primary" onclick="runAnalysis()">
+        ▶ Run Analysis
+      </button>
+    </section>
+
+
+    <div id="loader" class="loader hidden">
+      <div class="spinner"></div>
+      <p>Running K-Means segmentation…</p>
+    </div>
+
+   
+    <div id="error-box" class="error-box hidden"></div>
+
+    
+    <section id="results" class="hidden">
+
+     
+      <div class="card">
+        <h2 class="card-title">📈 Elbow &amp; Silhouette Analysis</h2>
+        <p class="card-desc">
+          The <strong>Elbow</strong> chart shows inertia (sum of squared distances
+          to cluster centres). Pick k where the curve "bends". The
+          <strong>Silhouette</strong> score (higher = better) measures how well
+          each point fits its own cluster vs others.
+        </p>
+        <img id="elbow-img" class="chart-img" alt="Elbow and Silhouette plot" />
+      </div>
+
+    
+      <div class="card">
+        <h2 class="card-title">🔵 2D Cluster Scatter (PCA)</h2>
+        <p class="card-desc">
+          PCA compresses 4 features into 2 dimensions so we can draw the clusters
+          on a flat plane. Each colour = one segment. Perfect clusters = tight,
+          non-overlapping blobs.
+        </p>
+        <img id="scatter-img" class="chart-img" alt="PCA scatter plot" />
+      </div>
+
+     
+      <div class="card">
+        <h2 class="card-title">📦 Feature Distributions per Segment</h2>
+        <p class="card-desc">
+          Box plots show the spread of Age, Income, and Spending Score inside
+          each segment. The middle line = median. The box = middle 50% of values.
+          Dots outside = outliers.
+        </p>
+        <img id="box-img" class="chart-img" alt="Box plots" />
+      </div>
+
+      
+      <div class="card">
+        <h2 class="card-title">🌡️ Segment Heatmap</h2>
+        <p class="card-desc">
+          Average feature values per segment – green is high, red is low.
+          Great for quickly spotting which segments are "high income + high spend"
+          vs "low income + low spend".
+        </p>
+        <img id="heat-img" class="chart-img" alt="Heatmap" />
+      </div>
+
+     
+      <div class="card">
+        <h2 class="card-title">👥 Segment Profiles &amp; Recommendations</h2>
+        <p class="card-desc">
+          Each segment gets a short business recommendation based on its average
+          age, income, and spending score.
+        </p>
+        
+        <div id="segment-cards" class="segment-grid"></div>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- ── FOOTER ──────────────────────────────────────────────────────────── -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>Built with Flask · scikit-learn · matplotlib · Learning Project 🚀</p>
+    </div>
+  </footer>
+
+ 
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+</body>
+</html>
