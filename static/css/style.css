@@ -41,7 +41,7 @@ img { max-width: 100%; height: auto; display: block; }  /* images never overflow
 
 .site-header {
   background: linear-gradient(135deg, #1a1d2e 0%, #0f1117 100%);
-  border-bottom: 1px solid var(--clr-accent);
+  border-bottom: 1px solid #4f46e5;
   padding: 1.25rem 0;
   margin-bottom: 2rem;
   box-shadow: 0 4px 20px rgba(79, 70, 229, 0.15);
