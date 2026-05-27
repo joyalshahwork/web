@@ -89,3 +89,9 @@ function buildSegmentCards(segments) {
     </div>
   `).join("");   
 }
+function showGraph(name) {
+  document.querySelectorAll('.graph-panel').forEach(p => p.classList.add('hidden'));
+  document.querySelectorAll('.graph-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('panel-' + name).classList.remove('hidden');
+  event.target.classList.add('active');
+}
