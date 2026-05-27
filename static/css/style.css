@@ -7,7 +7,7 @@
   --clr-accent2:  #10b981;   /* emerald – secondary accent                     */
   --clr-text:     #e2e8f0;   /* light grey – body text                         */
   --clr-muted:    #8892a4;   /* dim grey – helper / label text                 */
-  --clr-error:    #ef4444;   /* red – error messages                           */
+  --clr-error:    red;   /* red – error messages                           */
 
   --radius:       12px;      /* how rounded card corners are                   */
   --shadow:       0 4px 24px rgba(0,0,0,0.4);
@@ -15,7 +15,7 @@
   /* Font families */
   --font-main:    'Space Grotesk', system-ui, sans-serif;
   --font-mono:    'JetBrains Mono', monospace;
-}
+} 
 
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -318,7 +318,7 @@ img { max-width: 100%; height: auto; display: block; }  /* images never overflow
 /* Tablets and larger (≥ 640px) */
 @media (min-width: 640px) {
   .btn-primary {
-    width: auto;     
+    width: 100%;     
   }
 }
 
@@ -334,3 +334,33 @@ img { max-width: 100%; height: auto; display: block; }  /* images never overflow
 .seg-card:nth-child(3) { border-left: 4px solid #2ecc71; }
 .seg-card:nth-child(4) { border-left: 4px solid #f39c12; }
 .seg-card:nth-child(5) { border-left: 4px solid #9b59b6; }
+
+.graph-nav {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.graph-btn {
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  color: var(--clr-muted);
+  border-radius: 8px;
+  padding: 0.55rem 1rem;
+  font-family: var(--font-main);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.graph-btn:hover {
+  border-color: var(--clr-accent);
+  color: var(--clr-text);
+}
+
+.graph-btn.active {
+  background: var(--clr-accent);
+  color: #fff;
+  border-color: var(--clr-accent);
+}
